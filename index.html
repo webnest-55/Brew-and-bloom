@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew &amp; Bloom Café — Indore</title>
+<meta name="description" content="Brew & Bloom Café — handcrafted coffee, good food and slow moments in the heart of Indore. (Demo website concept.)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ Tokens ============ */
+  :root{
+    --cream:        #F1E8D6;
+    --cream-card:   #FBF6EA;
+    --espresso:     #2B1B12;
+    --espresso-70:  #4A3627;
+    --coffee:       #6F4E37;
+    --gold:         #B9863C;
+    --gold-deep:    #93692C;
+    --sage:         #6E7B5C;
+    --sage-light:   #DCE2CF;
+    --line:         rgba(43,27,18,0.14);
+    --shadow:       0 18px 40px -22px rgba(43,27,18,0.45);
+    --radius-lg:    28px;
+    --radius-md:    18px;
+    --radius-sm:    10px;
+    --maxw:         1180px;
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body:    'Karla', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--espresso);
+    background:var(--cream);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  h1,h2,h3,h4{font-family:var(--font-display);margin:0;color:var(--espresso);font-weight:500;}
+  p{margin:0;}
+  section{position:relative;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:var(--font-body);
+    font-size:0.82rem;
+    letter-spacing:0.02em;
+    color:var(--gold-deep);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .section-head{max-width:620px;margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.15;}
+  .section-head p{margin-top:14px;font-size:1.02rem;color:var(--espresso-70);}
+  .pad{padding:88px 0;}
+  :focus-visible{outline:2px solid var(--gold-deep);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+  }
+
+  /* ============ Demo ribbon ============ */
+  .demo-ribbon{
+    background:var(--espresso);
+    color:var(--cream);
+    text-align:center;
+    font-size:0.78rem;
+    letter-spacing:0.02em;
+    padding:7px 12px;
+    font-weight:500;
+  }
+  .demo-ribbon strong{color:var(--gold);font-weight:700;}
+
+  /* ============ Header ============ */
+  header{
+    position:sticky;top:0;z-index:200;
+    background:rgba(241,232,214,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:var(--maxw);margin:0 auto;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--font-display);font-size:1.3rem;font-weight:600;
+    text-decoration:none;color:var(--espresso);
+  }
+  .logo-mark{
+    width:38px;height:38px;border-radius:50%;
+    background:radial-gradient(circle at 32% 30%, var(--gold) 0%, var(--coffee) 60%, var(--espresso) 100%);
+    flex-shrink:0;
+    box-shadow:inset 0 0 0 2px rgba(251,246,234,0.25);
+  }
+  nav.primary-nav{display:flex;gap:34px;list-style:none;margin:0;padding:0;}
+  nav.primary-nav a{
+    text-decoration:none;font-size:0.98rem;font-weight:500;color:var(--espresso-70);
+    position:relative;padding-bottom:4px;
+    transition:color .2s ease;
+  }
+  nav.primary-nav a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold-deep);
+    transition:width .25s ease;
+  }
+  nav.primary-nav a:hover{color:var(--espresso);}
+  nav.primary-nav a:hover::after{width:100%;}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 26px;border-radius:100px;font-weight:600;font-size:0.95rem;
+    text-decoration:none;border:1px solid transparent;cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--espresso);color:var(--cream-card);}
+  .btn-primary:hover{background:var(--coffee);box-shadow:var(--shadow);}
+  .btn-outline{background:transparent;color:var(--espresso);border-color:var(--espresso);}
+  .btn-outline:hover{background:var(--espresso);color:var(--cream-card);}
+  .btn-gold{background:var(--gold);color:var(--espresso);}
+  .btn-gold:hover{background:var(--gold-deep);color:var(--cream-card);}
+  .btn-sm{padding:10px 20px;font-size:0.88rem;}
+
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+    background:var(--cream-card);cursor:pointer;padding:0;
+  }
+  .hamburger span{display:block;width:18px;height:2px;background:var(--espresso);margin:0 auto;transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-nav{
+    display:none;
+    position:fixed;inset:0;top:0;
+    background:var(--espresso);
+    z-index:300;
+    padding:28px 28px 40px;
+    transform:translateX(100%);
+    transition:transform .35s ease;
+  }
+  .mobile-nav.open{transform:translateX(0);}
+  .mobile-nav-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
+  .mobile-nav .logo{color:var(--cream);}
+  .mobile-close{
+    width:42px;height:42px;border-radius:50%;border:1px solid rgba(241,232,214,0.3);
+    background:transparent;color:var(--cream);font-size:1.3rem;cursor:pointer;
+  }
+  .mobile-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;}
+  .mobile-nav a{
+    display:block;color:var(--cream);text-decoration:none;font-family:var(--font-display);
+    font-size:1.9rem;padding:14px 0;border-bottom:1px solid rgba(241,232,214,0.14);
+  }
+  .mobile-nav .btn{margin-top:32px;width:100%;}
+
+  /* ============ Hero ============ */
+  .hero{
+    padding:70px 0 90px;
+    background:
+      radial-gradient(circle at 88% 18%, rgba(185,134,60,0.16), transparent 55%),
+      var(--cream);
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--cream-card);border:1px solid var(--line);
+    padding:8px 16px;border-radius:100px;font-size:0.82rem;font-weight:600;
+    color:var(--coffee);margin-bottom:24px;
+  }
+  .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--sage);}
+  .hero h1{
+    font-size:clamp(2.5rem,5.4vw,4rem);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{font-style:italic;color:var(--coffee);}
+  .hero p.lede{
+    margin-top:22px;font-size:1.12rem;color:var(--espresso-70);max-width:46ch;
+  }
+  .hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .hero-stats{display:flex;gap:34px;margin-top:46px;flex-wrap:wrap;}
+  .hero-stats div{border-left:2px solid var(--gold);padding-left:14px;}
+  .hero-stats strong{display:block;font-family:var(--font-display);font-size:1.5rem;}
+  .hero-stats span{font-size:0.86rem;color:var(--espresso-70);}
+
+  .hero-art{position:relative;}
+  .cup-illustration{
+    width:100%;aspect-ratio:1/1.05;border-radius:var(--radius-lg);
+    background:
+      radial-gradient(circle at 30% 22%, rgba(251,246,234,0.5), transparent 40%),
+      linear-gradient(160deg, var(--coffee) 0%, var(--espresso) 78%);
+    position:relative;overflow:hidden;box-shadow:var(--shadow);
+  }
+  .cup-illustration svg{position:absolute;inset:0;width:100%;height:100%;}
+  .floating-card{
+    position:absolute;background:var(--cream-card);border-radius:var(--radius-md);
+    padding:16px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;
+    border:1px solid var(--line);
+  }
+  .floating-card.fc-1{bottom:-22px;left:-22px;}
+  .floating-card.fc-2{top:-18px;right:-14px;}
+  .fc-icon{width:38px;height:38px;border-radius:50%;background:var(--sage-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .fc-icon svg{width:20px;height:20px;stroke:var(--sage);}
+  .floating-card strong{display:block;font-size:0.95rem;font-family:var(--font-display);}
+  .floating-card span{font-size:0.78rem;color:var(--espresso-70);}
+
+  /* ============ Menu ============ */
+  .menu{background:var(--cream-card);}
+  .menu-tabs{display:flex;gap:10px;margin-bottom:38px;flex-wrap:wrap;}
+  .menu-tab{
+    padding:11px 22px;border-radius:100px;border:1px solid var(--line);
+    background:transparent;font-weight:600;font-size:0.92rem;color:var(--espresso-70);
+    cursor:pointer;transition:all .2s ease;
+  }
+  .menu-tab.active, .menu-tab:hover{background:var(--espresso);color:var(--cream-card);border-color:var(--espresso);}
+  .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .menu-group{display:none;grid-column:1/-1;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .menu-group.active{display:grid;}
+  .menu-item{
+    display:flex;justify-content:space-between;gap:16px;
+    padding:22px;background:var(--cream);border-radius:var(--radius-md);
+    border:1px solid var(--line);
+  }
+  .menu-item h4{font-size:1.08rem;}
+  .menu-item p.desc{margin-top:6px;font-size:0.86rem;color:var(--espresso-70);}
+  .menu-item .price{font-family:var(--font-display);font-size:1.15rem;color:var(--coffee);white-space:nowrap;}
+  .menu-note{margin-top:28px;font-size:0.82rem;color:var(--espresso-70);font-style:italic;}
+
+  /* ============ Offer ============ */
+  .offer{
+    background:linear-gradient(135deg, var(--espresso) 0%, var(--coffee) 100%);
+    color:var(--cream);
+    border-radius:var(--radius-lg);
+    padding:64px 48px;
+    margin:0 24px;
+    max-width:calc(var(--maxw) - 48px);
+    margin-left:auto;margin-right:auto;
+    display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;
+    position:relative;overflow:hidden;
+  }
+  .offer::before{
+    content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;
+    border-radius:50%;background:rgba(185,134,60,0.25);
+  }
+  .offer-text{position:relative;max-width:520px;}
+  .offer h2{color:var(--cream);font-size:clamp(1.7rem,3.6vw,2.3rem);}
+  .offer p{margin-top:12px;color:rgba(241,232,214,0.82);font-size:1.02rem;}
+  .offer .btn{position:relative;}
+
+  /* ============ About ============ */
+  .about .wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center;}
+  .about-visual{
+    aspect-ratio:4/5;border-radius:var(--radius-lg);
+    background:linear-gradient(160deg, var(--sage-light) 0%, var(--cream-card) 100%);
+    position:relative;overflow:hidden;
+  }
+  .about-visual svg{position:absolute;inset:0;width:100%;height:100%;}
+  .about-copy p{color:var(--espresso-70);margin-top:16px;font-size:1.03rem;}
+  .about-copy p.disclosure{
+    margin-top:22px;padding:14px 18px;background:var(--sage-light);border-radius:var(--radius-sm);
+    font-size:0.88rem;color:var(--espresso);border-left:3px solid var(--sage);
+  }
+
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px;}
+  .why-card{
+    padding:26px 22px;background:var(--cream-card);border-radius:var(--radius-md);
+    border:1px solid var(--line);transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .why-icon{width:44px;height:44px;border-radius:12px;background:var(--sage-light);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .why-icon svg{width:22px;height:22px;stroke:var(--sage);}
+  .why-card h4{font-size:1.05rem;}
+  .why-card p{margin-top:8px;font-size:0.88rem;color:var(--espresso-70);}
+
+  /* ============ Gallery ============ */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:14px;
+  }
+  .gallery-grid button.g-item{
+    border:none;padding:0;border-radius:var(--radius-md);overflow:hidden;cursor:zoom-in;
+    position:relative;background:var(--coffee);
+  }
+  .gallery-grid button.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease;}
+  .gallery-grid button.g-item:hover img{transform:scale(1.07);}
+  .g-item.gi-1{grid-column:span 2;grid-row:span 2;}
+  .g-item.gi-4{grid-row:span 2;}
+  .g-caption{
+    position:absolute;left:0;right:0;bottom:0;padding:10px 12px;
+    background:linear-gradient(to top, rgba(43,27,18,0.75), transparent);
+    color:#fff;font-size:0.78rem;font-weight:600;text-align:left;opacity:0;transition:opacity .25s ease;
+  }
+  .g-item:hover .g-caption, .g-item:focus-visible .g-caption{opacity:1;}
+
+  .lightbox{
+    position:fixed;inset:0;background:rgba(20,12,7,0.92);z-index:400;
+    display:none;align-items:center;justify-content:center;padding:24px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:min(900px,92vw);max-height:82vh;border-radius:14px;object-fit:cover;}
+  .lightbox-close{
+    position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;
+    background:rgba(251,246,234,0.12);border:1px solid rgba(251,246,234,0.3);color:#fff;
+    font-size:1.3rem;cursor:pointer;
+  }
+  .lightbox-cap{position:absolute;bottom:34px;color:var(--cream);font-size:0.9rem;text-align:center;left:0;right:0;}
+
+  /* ============ Hours + Contact ============ */
+  .info-section .wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:20px;}
+  .hours-card, .contact-card{
+    background:var(--cream-card);border-radius:var(--radius-lg);padding:38px;border:1px solid var(--line);
+  }
+  .hours-card h3, .contact-card h3{font-size:1.4rem;margin-bottom:22px;}
+  .hours-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:0.96rem;}
+  .hours-row:last-child{border-bottom:none;}
+  .hours-row span.d{color:var(--espresso-70);}
+  .hours-row span.t{font-weight:600;}
+  .status-pill{
+    display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:9px 16px;
+    background:var(--sage-light);border-radius:100px;font-size:0.85rem;font-weight:600;color:var(--sage);
+  }
+  .status-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--sage);}
+
+  .contact-list{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-direction:column;gap:16px;}
+  .contact-list li{display:flex;gap:14px;align-items:flex-start;font-size:0.96rem;}
+  .contact-ic{width:36px;height:36px;border-radius:10px;background:var(--sage-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .contact-ic svg{width:18px;height:18px;stroke:var(--sage);}
+  .contact-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+  /* ============ Reservation ============ */
+  .reserve{background:var(--cream-card);}
+  .reserve-shell{
+    background:var(--cream);border-radius:var(--radius-lg);border:1px solid var(--line);
+    padding:44px;display:grid;grid-template-columns:0.8fr 1.2fr;gap:44px;
+  }
+  .reserve-info h3{font-size:1.6rem;}
+  .reserve-info p{margin-top:14px;color:var(--espresso-70);font-size:0.98rem;}
+  .reserve-info ul{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;}
+  .reserve-info li{display:flex;gap:10px;font-size:0.9rem;color:var(--espresso-70);align-items:flex-start;}
+  .reserve-info li svg{width:16px;height:16px;stroke:var(--sage);flex-shrink:0;margin-top:3px;}
+
+  form.res-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field{display:flex;flex-direction:column;gap:7px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:0.85rem;font-weight:600;color:var(--espresso-70);}
+  .field input, .field select, .field textarea{
+    padding:13px 15px;border-radius:var(--radius-sm);border:1px solid var(--line);
+    background:var(--cream-card);font-family:inherit;font-size:0.96rem;color:var(--espresso);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--gold-deep);outline:none;}
+  .field textarea{resize:vertical;min-height:90px;}
+  .field .err{font-size:0.78rem;color:#a94438;min-height:16px;}
+  .field.invalid input, .field.invalid select, .field.invalid textarea{border-color:#a94438;}
+  .form-msg{
+    grid-column:1/-1;padding:16px 18px;border-radius:var(--radius-sm);
+    background:var(--sage-light);color:var(--espresso);font-size:0.92rem;display:none;
+  }
+  .form-msg.show{display:block;}
+  .res-form .btn{grid-column:1/-1;justify-self:start;margin-top:6px;}
+
+  /* ============ Footer ============ */
+  footer{background:var(--espresso);color:var(--cream);padding:64px 0 28px;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 0.85fr 0.85fr 1fr;gap:40px;}
+  .footer-logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:1.3rem;color:var(--cream);}
+  .footer-tag{margin-top:14px;font-size:0.92rem;color:rgba(241,232,214,0.68);max-width:32ch;}
+  footer h5{font-size:0.85rem;letter-spacing:0.03em;color:var(--gold);margin-bottom:16px;font-weight:600;}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  footer a{color:rgba(241,232,214,0.8);text-decoration:none;font-size:0.92rem;}
+  footer a:hover{color:var(--cream);}
+  .insta-btn{
+    display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:10px 18px;
+    border-radius:100px;border:1px solid rgba(241,232,214,0.3);color:var(--cream);text-decoration:none;
+    font-size:0.88rem;width:fit-content;
+  }
+  .insta-btn:hover{background:rgba(241,232,214,0.1);}
+  .footer-bottom{
+    margin-top:52px;padding-top:24px;border-top:1px solid rgba(241,232,214,0.14);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-size:0.82rem;color:rgba(241,232,214,0.55);
+  }
+  .footer-bottom .badge{color:var(--gold);font-weight:600;}
+
+  /* ============ Responsive ============ */
+  @media (max-width:980px){
+    nav.primary-nav, .nav-actions{display:none;}
+    .hamburger{display:flex;}
+    .mobile-nav{display:block;}
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-art{order:-1;max-width:420px;margin:0 auto;}
+    .about .wrap{grid-template-columns:1fr;}
+    .about-visual{max-width:420px;margin:0 auto;}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .info-section .wrap{grid-template-columns:1fr;}
+    .reserve-shell{grid-template-columns:1fr;padding:30px;}
+    form.res-form{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    .pad{padding:64px 0;}
+    .menu-grid, .menu-group{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;}
+    .g-item.gi-1{grid-column:span 2;grid-row:span 2;}
+    .g-item.gi-4{grid-row:span 1;}
+    .offer{flex-direction:column;align-items:flex-start;padding:40px 26px;margin:0 16px;}
+    .hero-stats{gap:22px;}
+    .footer-grid{grid-template-columns:1fr;gap:32px;}
+    .reserve-shell{padding:22px;}
+    .floating-card{padding:12px 14px;}
+    .floating-card.fc-1{left:0;bottom:-16px;}
+    .floating-card.fc-2{right:0;top:-14px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon">DEMO CAFÉ — WEBSITE CONCEPT · Built by <strong>[Your Web Design Studio]</strong> to showcase a local café website</div>
+
+<header>
+  <div class="nav-row">
+    <a href="#home" class="logo">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Brew &amp; Bloom
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#reserve" class="btn btn-primary btn-sm">Reserve a Table</a>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-top">
+    <a href="#home" class="logo"><span class="logo-mark" aria-hidden="true"></span>Brew &amp; Bloom</a>
+    <button class="mobile-close" id="mobileCloseBtn" aria-label="Close menu">✕</button>
+  </div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#reserve" class="btn btn-gold">Reserve a Table</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="hero-eyebrow"><span class="dot"></span> Indore, Madhya Pradesh</span>
+      <h1>Good Coffee.<br>Good Food.<br><em>Good Moments.</em></h1>
+      <p class="lede">Your cozy corner for handcrafted coffee, delicious bites and slow moments in the heart of Indore.</p>
+      <div class="hero-ctas">
+        <a href="#menu" class="btn btn-primary">View Menu</a>
+        <a href="#reserve" class="btn btn-outline">Reserve a Table</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>4.8★</strong><span>Demo rating</span></div>
+        <div><strong>12+</strong><span>Signature brews</span></div>
+        <div><strong>9AM–10:30PM</strong><span>Open daily</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="cup-illustration" role="img" aria-label="Illustration of a steaming coffee cup on a saucer">
+        <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M120 300 Q120 330 200 330 Q280 330 280 300 L268 190 L132 190 Z" fill="#F1E8D6" opacity="0.95"/>
+          <ellipse cx="200" cy="190" rx="68" ry="14" fill="#B9863C"/>
+          <path d="M280 210 Q320 210 320 240 Q320 270 280 270" stroke="#F1E8D6" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <rect x="90" y="330" width="220" height="16" rx="8" fill="#4A3627"/>
+          <path d="M170 150 Q160 120 180 100" stroke="#F1E8D6" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.55">
+            <animate attributeName="d" dur="4s" repeatCount="indefinite"
+              values="M170 150 Q160 120 180 100;M170 150 Q180 110 165 90;M170 150 Q160 120 180 100" />
+          </path>
+          <path d="M210 150 Q200 115 220 95" stroke="#F1E8D6" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.4">
+            <animate attributeName="d" dur="4.6s" repeatCount="indefinite"
+              values="M210 150 Q200 115 220 95;M210 150 Q220 105 205 85;M210 150 Q200 115 220 95" />
+          </path>
+        </svg>
+      </div>
+      <div class="floating-card fc-1">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg></div>
+        <div><strong>Small-batch</strong><span>Roasted weekly</span></div>
+      </div>
+      <div class="floating-card fc-2">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><strong>Open Today</strong><span>9AM – 10:30PM</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="menu pad" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Menu</span>
+      <h2>Crafted for slow mornings and long afternoons.</h2>
+      <p>A short, seasonal menu of coffee, bites and desserts — made fresh, served warm.</p>
+    </div>
+
+    <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+      <button class="menu-tab active" data-tab="coffee" role="tab" aria-selected="true">Coffee</button>
+      <button class="menu-tab" data-tab="bites" role="tab" aria-selected="false">Breakfast &amp; Bites</button>
+      <button class="menu-tab" data-tab="desserts" role="tab" aria-selected="false">Desserts</button>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-group active" data-group="coffee">
+        <div class="menu-item">
+          <div><h4>Classic Cappuccino</h4><p class="desc">Double shot, steamed milk, cocoa dust</p></div>
+          <span class="price">₹149</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Café Latte</h4><p class="desc">Smooth espresso with silky micro-foam</p></div>
+          <span class="price">₹159</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Mocha</h4><p class="desc">Dark chocolate, espresso, whipped cream</p></div>
+          <span class="price">₹179</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Cold Coffee</h4><p class="desc">Chilled, blended, topped with cream</p></div>
+          <span class="price">₹169</span>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group="bites">
+        <div class="menu-item">
+          <div><h4>Avocado Toast</h4><p class="desc">Sourdough, smashed avocado, chili flakes</p></div>
+          <span class="price">₹249</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Cheese Garlic Bread</h4><p class="desc">Toasted, molten cheese, garlic butter</p></div>
+          <span class="price">₹199</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Loaded Fries</h4><p class="desc">Crisp fries, cheese sauce, herbs</p></div>
+          <span class="price">₹229</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Veg Sandwich</h4><p class="desc">Grilled, garden veggies, mint chutney</p></div>
+          <span class="price">₹199</span>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group="desserts">
+        <div class="menu-item">
+          <div><h4>Chocolate Brownie</h4><p class="desc">Fudgy, warm, served with vanilla</p></div>
+          <span class="price">₹179</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Lotus Biscoff Cheesecake</h4><p class="desc">No-bake, creamy, biscoff crumble</p></div>
+          <span class="price">₹249</span>
+        </div>
+        <div class="menu-item">
+          <div><h4>Chocolate Waffle</h4><p class="desc">Crisp waffle, chocolate drizzle</p></div>
+          <span class="price">₹229</span>
+        </div>
+      </div>
+    </div>
+    <p class="menu-note">Menu items and prices shown are demo content for illustration purposes only.</p>
+  </div>
+</section>
+
+<!-- ============ OFFER ============ -->
+<section class="pad" style="padding-top:0;padding-bottom:0;margin-bottom:88px;">
+  <div class="offer">
+    <div class="offer-text">
+      <span class="eyebrow" style="color:var(--gold);">Special Offer</span>
+      <h2>Your First Sip Is On Us ☕</h2>
+      <p>Enjoy 10% off on your first dine-in visit — a small welcome from our table to yours. (Demo offer.)</p>
+    </div>
+    <a href="#reserve" class="btn btn-gold">Reserve a Table</a>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about pad" id="about">
+  <div class="wrap">
+    <div class="about-visual" role="img" aria-label="Illustration of a cozy café interior">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="500" fill="#DCE2CF"/>
+        <circle cx="200" cy="180" r="120" fill="#FBF6EA" opacity="0.6"/>
+        <rect x="70" y="300" width="100" height="130" rx="8" fill="#6F4E37" opacity="0.85"/>
+        <rect x="230" y="260" width="100" height="170" rx="8" fill="#2B1B12" opacity="0.75"/>
+        <circle cx="120" cy="230" r="28" fill="#B9863C"/>
+        <circle cx="280" cy="200" r="20" fill="#6E7B5C"/>
+      </svg>
+    </div>
+    <div class="about-copy">
+      <span class="eyebrow">Our Story</span>
+      <h2>A Little Place to Slow Down.</h2>
+      <p>Brew &amp; Bloom Café is a fictional demo café created to show how a local café in Indore could present its menu, atmosphere, location and contact details online — from a first glance at the homepage to a table reservation.</p>
+      <p>Every section here — the menu, the gallery, the reservation form — is built to demonstrate what a real, working café website can look and feel like.</p>
+      <p class="disclosure">This is a demo project built for a web-design portfolio. Brew &amp; Bloom Café is not a real business.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></div>
+        <h4>Freshly Brewed</h4>
+        <p>Beans ground to order, every single cup.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+        <h4>Cozy Atmosphere</h4>
+        <p>Warm light, soft seating, unhurried afternoons.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 1 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z"/></svg></div>
+        <h4>Delicious Bites</h4>
+        <p>Simple, seasonal food made fresh daily.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h4>Easy Reservations</h4>
+        <p>Book a table online in under a minute.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="pad" id="gallery" style="background:var(--cream-card);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Gallery</span>
+      <h2>A glimpse inside Brew &amp; Bloom.</h2>
+      <p>Coffee, desserts, interiors and the people who make it feel like home. Tap any photo to view it larger.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <button class="g-item gi-1" data-full="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop" data-cap="Latte art, table-side">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=700&auto=format&fit=crop" alt="Cup of coffee with latte art on a wooden table" loading="lazy">
+        <span class="g-caption">Latte art, table-side</span>
+      </button>
+      <button class="g-item gi-2" data-full="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=1200&auto=format&fit=crop" data-cap="Freshly baked desserts">
+        <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=700&auto=format&fit=crop" alt="Slice of cake on a plate" loading="lazy">
+        <span class="g-caption">Freshly baked desserts</span>
+      </button>
+      <button class="g-item gi-3" data-full="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1200&auto=format&fit=crop" data-cap="Our cozy interior">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=700&auto=format&fit=crop" alt="Cozy café interior seating" loading="lazy">
+        <span class="g-caption">Our cozy interior</span>
+      </button>
+      <button class="g-item gi-4" data-full="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1200&auto=format&fit=crop" data-cap="Weekend breakfast spread">
+        <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=700&auto=format&fit=crop" alt="Breakfast spread on a table" loading="lazy">
+        <span class="g-caption">Weekend breakfast spread</span>
+      </button>
+      <button class="g-item gi-5" data-full="https://images.unsplash.com/photo-1522992319-0365e5f11656?q=80&w=1200&auto=format&fit=crop" data-cap="Friends catching up">
+        <img src="https://images.unsplash.com/photo-1522992319-0365e5f11656?q=80&w=700&auto=format&fit=crop" alt="People enjoying coffee together" loading="lazy">
+        <span class="g-caption">Friends catching up</span>
+      </button>
+      <button class="g-item gi-6" data-full="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1200&auto=format&fit=crop" data-cap="Roasted beans, ready to brew">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=700&auto=format&fit=crop" alt="Close up of roasted coffee beans" loading="lazy">
+        <span class="g-caption">Roasted beans, ready to brew</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close image preview">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-cap" id="lightboxCap"></div>
+</div>
+
+<!-- ============ HOURS + CONTACT ============ -->
+<section class="info-section pad" id="contact">
+  <div class="wrap">
+    <div class="hours-card">
+      <h3>Opening Hours</h3>
+      <div class="hours-row"><span class="d">Monday – Sunday</span><span class="t">9:00 AM – 10:30 PM</span></div>
+      <span class="status-pill"><span class="dot"></span> Open now · Demo status</span>
+    </div>
+
+    <div class="contact-card">
+      <h3>Visit or Reach Us</h3>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span>Indore, Madhya Pradesh, India</span>
+        </li>
+        <li>
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>+91 90000 00000 <em style="opacity:0.6;font-style:normal;">(demo number)</em></span>
+        </li>
+        <li>
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg></span>
+          <span>hello@brewandbloom.example <em style="opacity:0.6;font-style:normal;">(demo email)</em></span>
+        </li>
+      </ul>
+      <div class="contact-actions">
+        <a class="btn btn-primary btn-sm" href="https://www.google.com/maps/search/?api=1&query=Indore,Madhya+Pradesh" target="_blank" rel="noopener">Get Directions</a>
+        <a class="btn btn-gold btn-sm" href="https://wa.me/919000000000" target="_blank" rel="noopener">WhatsApp Us</a>
+        <a class="btn btn-outline btn-sm" href="tel:+919000000000">Call Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESERVATION ============ -->
+<section class="reserve pad" id="reserve">
+  <div class="wrap">
+    <div class="reserve-shell">
+      <div class="reserve-info">
+        <span class="eyebrow">Reserve a Table</span>
+        <h3>Save your seat at Brew &amp; Bloom.</h3>
+        <p>Fill in your details and we'll (in a real café) confirm your table shortly. This demo form does not send data anywhere.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> No payment required to reserve</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Tables held for 15 minutes</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Large groups, message us directly</li>
+        </ul>
+      </div>
+
+      <form class="res-form" id="reserveForm" novalidate>
+        <div class="form-msg" id="formMsg"></div>
+
+        <div class="field" id="f-name">
+          <label for="rname">Name</label>
+          <input type="text" id="rname" name="name" placeholder="Your full name" autocomplete="name">
+          <span class="err"></span>
+        </div>
+
+        <div class="field" id="f-phone">
+          <label for="rphone">Phone</label>
+          <input type="tel" id="rphone" name="phone" placeholder="10-digit mobile number" autocomplete="tel">
+          <span class="err"></span>
+        </div>
+
+        <div class="field" id="f-date">
+          <label for="rdate">Date</label>
+          <input type="date" id="rdate" name="date">
+          <span class="err"></span>
+        </div>
+
+        <div class="field" id="f-time">
+          <label for="rtime">Time</label>
+          <input type="time" id="rtime" name="time">
+          <span class="err"></span>
+        </div>
+
+        <div class="field full" id="f-guests">
+          <label for="rguests">Number of Guests</label>
+          <select id="rguests" name="guests">
+            <option value="">Select guests</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+            <option>5</option><option>6</option><option>7+</option>
+          </select>
+          <span class="err"></span>
+        </div>
+
+        <div class="field full">
+          <label for="rmessage">Message <span style="font-weight:400;color:var(--espresso-70);">(optional)</span></label>
+          <textarea id="rmessage" name="message" placeholder="Occasion, seating preference, allergies…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Request Reservation</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><span class="logo-mark" aria-hidden="true"></span>Brew &amp; Bloom Café</div>
+        <p class="footer-tag">Good Coffee. Good Food. Good Moments. A demo café concept, made with care in Indore.</p>
+        <a class="insta-btn" href="https://instagram.com/brewandbloom.demo" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          @brewandbloom.demo <em style="opacity:0.6;font-style:normal;">(demo link)</em>
+        </a>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+919000000000">+91 90000 00000</a></li>
+          <li><a href="mailto:hello@brewandbloom.example">hello@brewandbloom.example</a></li>
+          <li><a href="https://wa.me/919000000000" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Location</h5>
+        <ul>
+          <li>Indore, Madhya Pradesh</li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Indore,Madhya+Pradesh" target="_blank" rel="noopener">Get Directions →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yearNow">2026</span> Brew &amp; Bloom Café. All rights reserved.</span>
+      <span class="badge">DEMO CAFÉ — WEBSITE CONCEPT</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  document.getElementById('yearNow').textContent = new Date().getFullYear();
+
+  /* ---------- Mobile menu ---------- */
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  var mobileClose = document.getElementById('mobileCloseBtn');
+
+  function openMobileNav(){
+    mobileNav.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav(){
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', function(){
+    mobileNav.classList.contains('open') ? closeMobileNav() : openMobileNav();
+  });
+  mobileClose.addEventListener('click', closeMobileNav);
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMobileNav);
+  });
+
+  /* ---------- Menu tabs ---------- */
+  var tabs = document.querySelectorAll('.menu-tab');
+  var groups = document.querySelectorAll('.menu-group');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var target = tab.getAttribute('data-tab');
+      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      groups.forEach(function(g){
+        g.classList.toggle('active', g.getAttribute('data-group') === target);
+      });
+    });
+  });
+
+  /* ---------- Gallery lightbox ---------- */
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxCap = document.getElementById('lightboxCap');
+  var lightboxClose = document.getElementById('lightboxClose');
+  var lastFocused = null;
+
+  document.querySelectorAll('.g-item').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      lastFocused = btn;
+      lightboxImg.src = btn.getAttribute('data-full');
+      lightboxImg.alt = btn.getAttribute('data-cap') || '';
+      lightboxCap.textContent = btn.getAttribute('data-cap') || '';
+      lightbox.classList.add('open');
+      lightboxClose.focus();
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      if(lightbox.classList.contains('open')) closeLightbox();
+      if(mobileNav.classList.contains('open')) closeMobileNav();
+    }
+  });
+
+  /* ---------- Reservation form ---------- */
+  var form = document.getElementById('reserveForm');
+  var formMsg = document.getElementById('formMsg');
+
+  function setError(fieldId, message){
+    var field = document.getElementById(fieldId);
+    field.classList.toggle('invalid', !!message);
+    var errEl = field.querySelector('.err');
+    if(errEl) errEl.textContent = message || '';
+  }
+
+  function todayStr(){
+    var d = new Date();
+    var mm = String(d.getMonth()+1).padStart(2,'0');
+    var dd = String(d.getDate()).padStart(2,'0');
+    return d.getFullYear() + '-' + mm + '-' + dd;
+  }
+  document.getElementById('rdate').setAttribute('min', todayStr());
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    formMsg.classList.remove('show');
+    var valid = true;
+
+    var name = document.getElementById('rname').value.trim();
+    if(name.length < 2){ setError('f-name','Please enter your name.'); valid = false; }
+    else setError('f-name','');
+
+    var phone = document.getElementById('rphone').value.trim();
+    if(!/^[0-9]{10}$/.test(phone.replace(/\s+/g,''))){ setError('f-phone','Enter a valid 10-digit phone number.'); valid = false; }
+    else setError('f-phone','');
+
+    var date = document.getElementById('rdate').value;
+    if(!date){ setError('f-date','Please choose a date.'); valid = false; }
+    else setError('f-date','');
+
+    var time = document.getElementById('rtime').value;
+    if(!time){ setError('f-time','Please choose a time.'); valid = false; }
+    else setError('f-time','');
+
+    var guests = document.getElementById('rguests').value;
+    if(!guests){ setError('f-guests','Please select guest count.'); valid = false; }
+    else setError('f-guests','');
+
+    if(!valid) return;
+
+    formMsg.textContent = "Thanks! Your reservation request has been received. This is a demo website.";
+    formMsg.classList.add('show');
+    form.reset();
+    document.getElementById('rdate').setAttribute('min', todayStr());
+    formMsg.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+})();
+</script>
+</body>
+</html>
